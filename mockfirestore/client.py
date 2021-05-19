@@ -44,6 +44,10 @@ class MockFirestore:
                 self._data[name] = {}
             return CollectionReference(self._data, [name])
 
+    def collections(self) -> Iterable[CollectionReference]:
+        for collection_name in self._data:
+            yield CollectionReference(self._data, [collection_name])
+
     def reset(self):
         self._data = {}
 
