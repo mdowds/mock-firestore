@@ -121,6 +121,8 @@ class Query:
     def _compare_func(self, op: str) -> Callable[[T, T], bool]:
         if op == '==':
             return lambda x, y: x == y
+        elif op == '!=':
+            return lambda x, y: x != y
         elif op == '<':
             return lambda x, y: x < y
         elif op == '<=':

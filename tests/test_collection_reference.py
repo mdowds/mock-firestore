@@ -81,6 +81,16 @@ class TestCollectionReference(TestCase):
         docs = list(fs.collection('foo').where('valid', '==', True).stream())
         self.assertEqual({'valid': True}, docs[0].to_dict())
 
+    def test_collection_whereNotEquals(self):
+        fs = MockFirestore()
+        fs._data = {'foo': {
+            'first': {'count': 1},
+            'second': {'count': 5}
+        }}
+
+        docs = list(fs.collection('foo').where('count', '!=', 1).stream())
+        self.assertEqual({'count': 5}, docs[0].to_dict())
+
     def test_collection_whereLessThan(self):
         fs = MockFirestore()
         fs._data = {'foo': {
